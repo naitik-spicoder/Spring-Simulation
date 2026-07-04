@@ -52,7 +52,6 @@ int main(){
     float t = 1;
     int i = 1;
     bool start_sim = false;
-    int space_count = 0;
     while (is_running){
         while (SDL_PollEvent(&event)){
             if (event.type == SDL_EVENT_QUIT){
@@ -61,14 +60,8 @@ int main(){
             }
             if (event.type == SDL_EVENT_KEY_DOWN){
 
-                if (event.key.key == SDLK_SPACE && start_sim){
-                    start_sim = false;
-                    space_count = 0;
-                }
-                if (event.key.key == SDLK_SPACE && space_count == 0){
+                if (event.key.key == SDLK_SPACE){
                     start_sim = true;
-                    space_count = 1;
-                    SDL_Delay(50);
                 }
             }
             
@@ -84,8 +77,9 @@ int main(){
             
             std::string A_str = std::to_string(A);
             std::string block_y = std::to_string(block.y);
-            RenderText(psurface,A_str,20,50,32);
-            RenderText(psurface,block_y,20,20,32);
+            RenderText(psurface,"Amplitude is "+A_str,20,50,32);
+            RenderText(psurface,"Frequancy is "+std::to_string(W),20,80,32);
+            RenderText(psurface,"x(t) = Asin(wt)",20,20,32);
 
             SDL_UpdateWindowSurface(pwindow);
 
